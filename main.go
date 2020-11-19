@@ -31,6 +31,7 @@ var (
 	MyConfig Configuration
 	backgroundImage *ebiten.Image
 	progressImage 	*ebiten.Image
+	// FIXME : Array of images
 	rank18Image     *ebiten.Image
 	rank17Image     *ebiten.Image
 	rank16Image     *ebiten.Image
@@ -83,7 +84,6 @@ func init() {
 
 func update(screen *ebiten.Image) error {
 
-	// Images options
 	opBackground := &ebiten.DrawImageOptions{}
 	opRank := &ebiten.DrawImageOptions{}
 	opRank.GeoM.Translate(0, 308)
@@ -113,7 +113,8 @@ func update(screen *ebiten.Image) error {
 	}
 
 	// Give/Remove levels
-	// FIXME : Re-enable when we write on file directly
+	// FIXME : Re-enable when we write on config.json directly
+
 	/*if IsKeyTriggered(ebiten.KeyU) == true {
 		days_in_a_row += 1
 		rank       = 18 - days_in_a_row
@@ -234,6 +235,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// FIXME : Make an array instead and align MyConfig.DaysCounter with the ranks
 	rank18Image, _, err = ebitenutil.NewImageFromFile("ranks/rank18.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
@@ -293,7 +295,7 @@ func main() {
 }
 
 func readConfig() {
-	/* reads a file config.json */
+	// Read config.json
 	fmt.Println("Reading config file...")
 	file, _ := os.Open("config.json")
 	defer file.Close()

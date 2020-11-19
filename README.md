@@ -6,6 +6,20 @@ A gamified "progress tracker" widget for your habits or anything you want to do 
 
 Pre-alpha-here-be-dragons edition. Still figuring ideas, not much set in stone (such as life !) :)
 
+## What's in the boooox ?
+
+Creating habits is hard, gamification can help and there's successfull examples of that (Habitica, running apps, ...)
+
+I wanted to have a simple widget to keep track of some habits and how well I am progressing in following them so I started to build one
+
+It's pretty flexible, it just shows data after all but in a nice way
+
+## Features
+
+Progress bar (100% = 60 days so stick to it !)
+Ranks icons & titles
+Shiny UI
+
 ## Usage
 
 #### Linux

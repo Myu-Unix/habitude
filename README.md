@@ -4,7 +4,7 @@
 
 A gamified "progress tracker" widget for your habits or anything you want to do daily !
 
-Pre-alpha-here-be-dragons edition. Still figuring ideas, not much set in stone (such as life !) :)
+**Prototype-Pre-alpha-here-be-dragons edition** : Still figuring ideas, not much set in stone (such as life !) :)
 
 ## What's in the boooox ?
 
@@ -16,10 +16,10 @@ It's pretty flexible, it just shows data after all but in a nice way
 
 ## Features
 
-Progress bar (100% = 60 days so stick to it !)
-Ranks icons & titles
-Shiny UI
-
+- Progress bar (100% = 60 days so stick to it !)
+- Ranks icons (partial) & titles (at your discretion)
+- Shiny UI 
+✨
 ## Usage
 
 #### Linux
@@ -48,9 +48,13 @@ You need to have a file called **config.json** with this format in the **same fo
 	  "Updated": "As of 19 Nov 2020"
 	}
 
+By modifiying the value of DaysCounter, habitude will react and show different icons and fill the progress bar.
+
+The max value for DaysCounter is 60.
+
 #### Background image
 
-Put a file named background.png in the folder where you run habitude, it needs to be 800x450
+Put a file named background.png in the folder where you run habitude, ideally 800x450
 
 #### Sidenote : Compile for Windows
 

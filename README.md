@@ -34,6 +34,10 @@ You need to have a file called **config.json** with this format in the **same fo
 	  "Updated": "As of 19 Nov 2020"
 	}
 
+#### Background image
+
+Put a file named background.png in the folder where you run habitude, it needs to be 800x450
+
 #### Sidenote : Compile for Windows
 
     GOOS=windows GOARCH=amd64 go build

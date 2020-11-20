@@ -17,10 +17,10 @@ It's pretty flexible, it just shows data after all but in a nice way
 ## Features
 
 - Progress bar (100% = 60 days so stick to it !)
-- Ranks icons & titles (at your discretion)
+- Ranks icons for the 18 first ranks & titles (at your discretion)
 - Shiny UI 
-
 ✨
+
 ## Install
 
 - Download the repo via https://github.com/Myu-Unix/habitude/archive/main.zip
@@ -54,9 +54,15 @@ Put a file named background.png in the folder where you run habitude, ideally 80
 
     GOOS=windows GOARCH=amd64 go build
 
+#### Sidenote : Compile for Linux
+
+	git clone git@github.com:Myu-Unix/habitude.git
+	go get ./...
+	go build
+
 #### Sidenote : Artwork
 
-- Credits goes to Square Enix for Final Fantasy XV Pocket Edition
-- Credits goes to Blizzard for Starcraft Icons
+- Credits goes to Square Enix & Co for Final Fantasy XV Pocket Edition
+- Credits goes to Blizzard & Co for Starcraft Icons
 
 Don't sue me okay ? :D

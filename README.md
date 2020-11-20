@@ -22,7 +22,8 @@ It's pretty flexible, it just shows data after all but in a nice way
 ✨
 ## Usage
 
-#### Linux
+- Create a folder to host the assets by downloading the repo via https://github.com/Myu-Unix/habitude/archive/main.zip
+- Download the executable at https://github.com/Myu-Unix/habitude/releases
 
     ./habitude
 
@@ -62,7 +63,7 @@ Put a file named background.png in the folder where you run habitude, ideally 80
 
 #### Sidenote : Artwork
 
-Credits goes to Square Enix for Final Fantasy XV Pocket Edition
-Credits goes to Blizzard for Starcraft Icons
+- Credits goes to Square Enix for Final Fantasy XV Pocket Edition
+- Credits goes to Blizzard for Starcraft Icons
 
 Don't sue me okay ? :D

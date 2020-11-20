@@ -188,8 +188,9 @@ func update(screen *ebiten.Image) error {
 }
 
 func main() {
-	var err error
+	fmt.Println(app_version)
 	fmt.Println("Loading images...")
+	var err error
 	backgroundImage, _, err = ebitenutil.NewImageFromFile("background.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
@@ -271,7 +272,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(app_version)
 	ebiten.SetWindowDecorated(false)
 	go readConfig()
 	fmt.Println("Starting UI")

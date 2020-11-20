@@ -17,23 +17,16 @@ It's pretty flexible, it just shows data after all but in a nice way
 ## Features
 
 - Progress bar (100% = 60 days so stick to it !)
-- Ranks icons (partial) & titles (at your discretion)
+- Ranks icons & titles (at your discretion)
 - Shiny UI 
+
 ✨
-## Usage
+## Install
 
-- Create a folder to host the assets by downloading the repo via https://github.com/Myu-Unix/habitude/archive/main.zip
-- Download the executable at https://github.com/Myu-Unix/habitude/releases
-
-    ./habitude
-
-Press 'K' to exit
-
-#### Windows
-
-    habitude.exe
-
-Press 'K' to exit
+- Download the repo via https://github.com/Myu-Unix/habitude/archive/main.zip
+- Download the executable for your OS at https://github.com/Myu-Unix/habitude/releases and put it on the same folder as the downloaded repo
+- Run the executable
+- Press 'K' to exit
 
 #### Config file format
 

@@ -27,24 +27,11 @@ type Configuration struct {
 }
 
 var (
-	app_version  = "Habitude Prototype 1"
+	app_version  = "Habitude Prototype 2"
 	MyConfig Configuration
 	backgroundImage *ebiten.Image
 	progressImage 	*ebiten.Image
-	// FIXME : Array of images
-	rank18Image     *ebiten.Image
-	rank17Image     *ebiten.Image
-	rank16Image     *ebiten.Image
-	rank15Image     *ebiten.Image
-	rank14Image     *ebiten.Image
-	rank13Image     *ebiten.Image
-	rank12Image     *ebiten.Image
-	rank11Image     *ebiten.Image
-	rank10Image     *ebiten.Image
-	rank9Image      *ebiten.Image
-	rank8Image     *ebiten.Image
-	rank7Image      *ebiten.Image
-	rank6Image      *ebiten.Image
+	rankImage[20] *ebiten.Image // 0 and 20 unused
 	keyStates       = map[ebiten.Key]int{}
 	rank int
 	
@@ -113,7 +100,7 @@ func update(screen *ebiten.Image) error {
 	}
 
 	// Give/Remove levels
-	// FIXME : Re-enable when we write on config.json directly
+	// FIXME : Idea to re-enable when we write on config.json directly ?
 
 	/*if IsKeyTriggered(ebiten.KeyU) == true {
 		days_in_a_row += 1
@@ -134,33 +121,8 @@ func update(screen *ebiten.Image) error {
 
 	rank = 18 - MyConfig.DaysCounter // 18 = 0 days performed
 
-	if rank == 18 {
-		screen.DrawImage(rank18Image, opRank)
-	} else if rank == 17 {
-		screen.DrawImage(rank17Image, opRank)
-	} else if rank == 16 {
-		screen.DrawImage(rank16Image, opRank)
-	} else if rank == 15 {
-		screen.DrawImage(rank15Image, opRank)
-	} else if rank == 14 {
-		screen.DrawImage(rank14Image, opRank)
-	} else if rank == 13 {
-		screen.DrawImage(rank13Image, opRank)
-	} else if rank == 12 {
-		screen.DrawImage(rank12Image, opRank)
-	} else if rank == 11 {
-		screen.DrawImage(rank11Image, opRank)
-	} else if rank == 10 {
-		screen.DrawImage(rank10Image, opRank)
-	} else if rank == 9 {
-		screen.DrawImage(rank9Image, opRank)
-	} else if rank == 8 {
-		screen.DrawImage(rank8Image, opRank)
-	} else if rank == 7 {
-		screen.DrawImage(rank7Image, opRank)
-	} else if rank == 6 {
-		screen.DrawImage(rank6Image, opRank)
-	}
+	// Draw proper rank icon
+	screen.DrawImage(rankImage[rank], opRank)
 
 	// Bottom of screen
 	text.Draw(screen, fmt.Sprintf("Rank %v", MyConfig.DaysCounter), mplusNormalFont, 200, 390, color.White)
@@ -227,6 +189,7 @@ func update(screen *ebiten.Image) error {
 
 func main() {
 	var err error
+	fmt.Println("Loading images...")
 	backgroundImage, _, err = ebitenutil.NewImageFromFile("background.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
@@ -235,62 +198,83 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// FIXME : Make an array instead and align MyConfig.DaysCounter with the ranks
-	rank18Image, _, err = ebitenutil.NewImageFromFile("ranks/rank18.png", ebiten.FilterNearest)
+	// FIXME : align MyConfig.DaysCounter with the ranks ?
+	rankImage[18], _, err = ebitenutil.NewImageFromFile("ranks/rank18.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
 	}
-	rank17Image, _, err = ebitenutil.NewImageFromFile("ranks/rank17.png", ebiten.FilterNearest)
+	rankImage[17], _, err = ebitenutil.NewImageFromFile("ranks/rank17.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
 	}
-	rank16Image, _, err = ebitenutil.NewImageFromFile("ranks/rank16.png", ebiten.FilterNearest)
+	rankImage[16], _, err = ebitenutil.NewImageFromFile("ranks/rank16.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
 	}
-	rank15Image, _, err = ebitenutil.NewImageFromFile("ranks/rank15.png", ebiten.FilterNearest)
+	rankImage[15], _, err = ebitenutil.NewImageFromFile("ranks/rank15.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
 	}
-	rank14Image, _, err = ebitenutil.NewImageFromFile("ranks/rank14.png", ebiten.FilterNearest)
+	rankImage[14], _, err = ebitenutil.NewImageFromFile("ranks/rank14.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
 	}
-	rank13Image, _, err = ebitenutil.NewImageFromFile("ranks/rank13.png", ebiten.FilterNearest)
+	rankImage[13], _, err = ebitenutil.NewImageFromFile("ranks/rank13.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
 	}
-	rank12Image, _, err = ebitenutil.NewImageFromFile("ranks/rank12.png", ebiten.FilterNearest)
+	rankImage[12], _, err = ebitenutil.NewImageFromFile("ranks/rank12.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
 	}
-	rank11Image, _, err = ebitenutil.NewImageFromFile("ranks/rank11.png", ebiten.FilterNearest)
+	rankImage[11], _, err = ebitenutil.NewImageFromFile("ranks/rank11.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
 	}
-	rank10Image, _, err = ebitenutil.NewImageFromFile("ranks/rank10.png", ebiten.FilterNearest)
+	rankImage[10], _, err = ebitenutil.NewImageFromFile("ranks/rank10.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
 	}
-	rank9Image, _, err = ebitenutil.NewImageFromFile("ranks/rank9.png", ebiten.FilterNearest)
+	rankImage[9], _, err = ebitenutil.NewImageFromFile("ranks/rank9.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
 	}
-	rank8Image, _, err = ebitenutil.NewImageFromFile("ranks/rank8.png", ebiten.FilterNearest)
+	rankImage[8], _, err = ebitenutil.NewImageFromFile("ranks/rank8.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
 	}
-	rank7Image, _, err = ebitenutil.NewImageFromFile("ranks/rank7.png", ebiten.FilterNearest)
+	rankImage[7], _, err = ebitenutil.NewImageFromFile("ranks/rank7.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
 	}
-	rank6Image, _, err = ebitenutil.NewImageFromFile("ranks/rank6.png", ebiten.FilterNearest)
+	rankImage[6], _, err = ebitenutil.NewImageFromFile("ranks/rank6.png", ebiten.FilterNearest)
+	if err != nil {
+		log.Fatal(err)
+	}
+	rankImage[5], _, err = ebitenutil.NewImageFromFile("ranks/rank5.png", ebiten.FilterNearest)
+	if err != nil {
+		log.Fatal(err)
+	}
+	rankImage[4], _, err = ebitenutil.NewImageFromFile("ranks/rank4.png", ebiten.FilterNearest)
+	if err != nil {
+		log.Fatal(err)
+	}
+	rankImage[3], _, err = ebitenutil.NewImageFromFile("ranks/rank3.png", ebiten.FilterNearest)
+	if err != nil {
+		log.Fatal(err)
+	}
+	rankImage[2], _, err = ebitenutil.NewImageFromFile("ranks/rank2.png", ebiten.FilterNearest)
+	if err != nil {
+		log.Fatal(err)
+	}
+	rankImage[1], _, err = ebitenutil.NewImageFromFile("ranks/rank1.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println(app_version)
 	ebiten.SetWindowDecorated(false)
 	go readConfig()
+	fmt.Println("Starting UI")
 	ebiten.Run(update, 800, 480, 0.5, app_version)
 }
 

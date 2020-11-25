@@ -19,17 +19,22 @@ import (
 type Configuration struct {
 	Description1 string
 	Description2 string
+	Description3 string
 	DaysCounter int
+	BonusCounter int
 	Quote string
 	QuoteAuthor string
 	RankTitle string
 	Updated string
+	DaysInARowCounter int
 }
 
 var (
-	app_version  = "Habitude Prototype 2"
+	app_name = "Habitude"
+	app_version  = "Prototype 3"
 	MyConfig Configuration
 	backgroundImage *ebiten.Image
+	logoImage *ebiten.Image
 	progressImage 	*ebiten.Image
 	rankImage[20] *ebiten.Image // 0 and 20 unused
 	keyStates       = map[ebiten.Key]int{}
@@ -43,6 +48,7 @@ var (
 	mplusSmallFont  font.Face
 	mplusNormalFont font.Face
 	mplusQuoteFont  font.Face
+	mplusMiniFont  font.Face
 )
 
 func init() {
@@ -52,30 +58,22 @@ func init() {
 	}
 
 	const dpi = 72
-	mplusNormalFont = truetype.NewFace(tt, &truetype.Options{
-		Size:    56,
-		DPI:     dpi,
-		Hinting: font.HintingFull,
-	})
-	mplusSmallFont = truetype.NewFace(tt, &truetype.Options{
-		Size:    34,
-		DPI:     dpi,
-		Hinting: font.HintingFull,
-	})
-	mplusQuoteFont = truetype.NewFace(tt, &truetype.Options{
-		Size:    28,
-		DPI:     dpi,
-		Hinting: font.HintingFull,
-	})
+	mplusNormalFont = truetype.NewFace(tt, &truetype.Options{Size:56,DPI:dpi,Hinting: font.HintingFull,})
+	mplusSmallFont = truetype.NewFace(tt, &truetype.Options{Size:34,DPI:dpi,Hinting: font.HintingFull,})
+	mplusQuoteFont = truetype.NewFace(tt, &truetype.Options{Size:28,DPI:dpi,Hinting: font.HintingFull,})
+	mplusMiniFont = truetype.NewFace(tt, &truetype.Options{Size:24,DPI:dpi,Hinting: font.HintingFull,})
 }
 
 func update(screen *ebiten.Image) error {
 
 	opBackground := &ebiten.DrawImageOptions{}
+	opLogo := &ebiten.DrawImageOptions{}
 	opRank := &ebiten.DrawImageOptions{}
 	opRank.GeoM.Translate(0, 308)
+	opLogo.GeoM.Translate(730, 10)
 
 	screen.DrawImage(backgroundImage, opBackground)
+	screen.DrawImage(logoImage, opLogo)
 
 	// Handle keypress with Ebiten
 	if ebiten.IsKeyPressed(ebiten.KeyK) {
@@ -112,20 +110,23 @@ func update(screen *ebiten.Image) error {
 		rank       = 18 - days_in_a_row
 	} */
 
-	text.Draw(screen, string(MyConfig.Description1), mplusSmallFont, 15, 50, color.White)
-	text.Draw(screen, string(MyConfig.Description2), mplusSmallFont, 15, 85, color.White)
+	text.Draw(screen, string(app_name), mplusSmallFont, 600, 40, color.RGBA{0, 0, 0, 160})
+	text.Draw(screen, string(app_version), mplusMiniFont, 620, 64, color.RGBA{0, 0, 0, 160})
+	text.Draw(screen, string(MyConfig.Description1), mplusSmallFont, 10, 55, color.RGBA{0, 0, 0, 160})
+	text.Draw(screen, string(MyConfig.Description2), mplusSmallFont, 10, 90, color.RGBA{0, 0, 0, 160})
+	text.Draw(screen, string(MyConfig.Description3), mplusSmallFont, 10, 125, color.RGBA{0, 0, 0, 160})
 	ebitenutil.DrawRect(screen, float64(30), float64(190), float64(780), 64, color.RGBA{0, 0, 0, 160}) // Quote foreground
 	text.Draw(screen, string(MyConfig.Quote), mplusQuoteFont, 40, 220, color.White)
 	text.Draw(screen, string(MyConfig.QuoteAuthor), mplusQuoteFont, 40, 245, color.White)
 	ebitenutil.DrawRect(screen, float64(0), float64(306), float64(810), 256, color.RGBA{0, 0, 0, 160})
 
-	rank = 18 - MyConfig.DaysCounter // 18 = 0 days performed
+	rank = 18 - (MyConfig.DaysCounter + MyConfig.BonusCounter) // 18 = 0 days performed
 
 	// Draw proper rank icon
 	screen.DrawImage(rankImage[rank], opRank)
 
 	// Bottom of screen
-	text.Draw(screen, fmt.Sprintf("Rank %v", MyConfig.DaysCounter), mplusNormalFont, 200, 390, color.White)
+	text.Draw(screen, fmt.Sprintf("Rank %v", MyConfig.DaysCounter + MyConfig.BonusCounter), mplusNormalFont, 200, 390, color.White)
 	text.Draw(screen, string(MyConfig.RankTitle), mplusSmallFont, 375, 385, color.White)
 	text.Draw(screen, string(MyConfig.Updated), mplusQuoteFont, 200, 430, color.White)
 
@@ -133,7 +134,7 @@ func update(screen *ebiten.Image) error {
 	opProgress10 := &ebiten.DrawImageOptions{}
 	opProgress10.GeoM.Translate(172, 450)
 	opProgress20 := &ebiten.DrawImageOptions{}
-	opProgress20.GeoM.Translate(236, 450)
+	opProgress20.GeoM.Translate(234, 450)
 	opProgress30 := &ebiten.DrawImageOptions{}
 	opProgress30.GeoM.Translate(296, 450)
 	opProgress40 := &ebiten.DrawImageOptions{}
@@ -143,7 +144,7 @@ func update(screen *ebiten.Image) error {
 	opProgress60 := &ebiten.DrawImageOptions{}
 	opProgress60.GeoM.Translate(482, 450)
 	opProgress70 := &ebiten.DrawImageOptions{}
-	opProgress70.GeoM.Translate(542, 450)
+	opProgress70.GeoM.Translate(544, 450)
 	opProgress80 := &ebiten.DrawImageOptions{}
 	opProgress80.GeoM.Translate(606, 450)
 	opProgress90 := &ebiten.DrawImageOptions{}
@@ -184,14 +185,20 @@ func update(screen *ebiten.Image) error {
 	screen.DrawImage(progressImage, opProgress100)
 	}
 
+	text.Draw(screen, fmt.Sprintf("%v days in a row !", MyConfig.DaysInARowCounter), mplusQuoteFont, 600, 475, color.RGBA{84, 84, 84, 230})
+
 	return nil
 }
 
 func main() {
-	fmt.Println(app_version)
+	fmt.Println(app_name, app_version)
 	fmt.Println("Loading images...")
 	var err error
 	backgroundImage, _, err = ebitenutil.NewImageFromFile("background.png", ebiten.FilterNearest)
+	if err != nil {
+		log.Fatal(err)
+	}
+	logoImage, _, err = ebitenutil.NewImageFromFile("bird.png", ebiten.FilterNearest)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -275,7 +282,7 @@ func main() {
 	ebiten.SetWindowDecorated(false)
 	go readConfig()
 	fmt.Println("Starting UI")
-	ebiten.Run(update, 800, 480, 0.5, app_version)
+	ebiten.Run(update, 800, 480, 0.5, app_name)
 }
 
 func readConfig() {

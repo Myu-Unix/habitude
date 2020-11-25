@@ -37,7 +37,8 @@ You need to have a file called **config.json** with this format in the **same fo
 	  "Description2": "No pecking your nose",
 	  "Quote": "Waste no more time arguing what a good man should be. Be one",
 	  "QuoteAuthor":"- Marcus Aurelius",
-	  "DaysCounter": 2,
+	  "DaysCounter": 7,
+	  "DaysInARowCounter": 5,
 	  "RankTitle": "\"Super Hero Cadet\"",
 	  "Updated": "As of 19 Nov 2020"
 	}

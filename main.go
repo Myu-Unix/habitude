@@ -27,6 +27,7 @@ type Configuration struct {
 	RankTitle string
 	Updated string
 	DaysInARowCounter int
+	DarkBg int
 }
 
 var (
@@ -110,11 +111,20 @@ func update(screen *ebiten.Image) error {
 		rank       = 18 - days_in_a_row
 	} */
 
+	if MyConfig.DarkBg == 1 {
+	text.Draw(screen, string(app_name), mplusSmallFont, 600, 40, color.White)
+	text.Draw(screen, string(app_version), mplusMiniFont, 620, 64, color.White)
+	text.Draw(screen, string(MyConfig.Description1), mplusSmallFont, 10, 55, color.White)
+	text.Draw(screen, string(MyConfig.Description2), mplusSmallFont, 10, 90, color.White)
+	text.Draw(screen, string(MyConfig.Description3), mplusSmallFont, 10, 125, color.White)
+	} else {
 	text.Draw(screen, string(app_name), mplusSmallFont, 600, 40, color.RGBA{0, 0, 0, 160})
 	text.Draw(screen, string(app_version), mplusMiniFont, 620, 64, color.RGBA{0, 0, 0, 160})
 	text.Draw(screen, string(MyConfig.Description1), mplusSmallFont, 10, 55, color.RGBA{0, 0, 0, 160})
 	text.Draw(screen, string(MyConfig.Description2), mplusSmallFont, 10, 90, color.RGBA{0, 0, 0, 160})
-	text.Draw(screen, string(MyConfig.Description3), mplusSmallFont, 10, 125, color.RGBA{0, 0, 0, 160})
+	text.Draw(screen, string(MyConfig.Description3), mplusSmallFont, 10, 125, color.RGBA{0, 0, 0, 160})	
+	}
+
 	ebitenutil.DrawRect(screen, float64(30), float64(190), float64(780), 64, color.RGBA{0, 0, 0, 160}) // Quote foreground
 	text.Draw(screen, string(MyConfig.Quote), mplusQuoteFont, 40, 220, color.White)
 	text.Draw(screen, string(MyConfig.QuoteAuthor), mplusQuoteFont, 40, 245, color.White)

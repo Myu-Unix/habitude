@@ -1,6 +1,6 @@
 ## Habitude
 
-![img](screenie.png)
+![img](screenie.png) ![img](screenie2.png)
 
 A gamified "progress tracker" widget for your habits or anything you want to do daily !
 
